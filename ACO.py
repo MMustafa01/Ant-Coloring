@@ -206,7 +206,9 @@ class AntCol:
 
     def init_pharamones(self) -> np.ndarray:
         pharamone_trail = np.ones(self.graph.shape)
+        
         # print(self.pharamone_trail.shape)
+        
         for i in range(self.graph.shape[0]):
             neighbors = self.get_neighbours(i)
             pharamone_trail[i,neighbors] = 0
@@ -216,10 +218,12 @@ class AntCol:
         
     def get_neighbours(self, v) :
         neighbors = list()
-        for i in range(len(self.graph[v])):
-            if not self.graph[v,i] == 0:
-                neighbors.append(i)
-        return neighbors
+        rows = self.graph[v,:]
+        return np.where(rows!=0)[0]
+        # for i in range(len(self.graph[v])):
+        #     if not self.graph[v,i] == 0:
+        #         neighbors.append(i)
+        # return neighbors
     
 
     def degree(self,v) -> int:
@@ -235,8 +239,8 @@ if __name__ == '__main__':
     alpha = 0.5
     beta = 0.5
     gamma = 0.5
-    iterations = 10
-    num_ants = 20
+    iterations = 20
+    num_ants = 10
     dataset = 'queen11_11.col'
 
     graph_coloring = AntCol(alpha= alpha,
