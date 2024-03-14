@@ -83,9 +83,9 @@ class AntCol:
         plt.title('Best So Far and Average Values')
         plt.grid(True)
         plt.legend()
-
+        plt.savefig(f'figures/{self.dataset}-{self.alpha}-{self.beta}-{self.ant_num}-{self.rho}.jpg')
         # Display the plot
-        plt.show()
+        # plt.show()
 
         return None 
 
@@ -175,17 +175,6 @@ class AntCol:
 
 
     def stochastic_sampling(self,items, probabilities):
-        """
-        Selects a random item from a list based on the corresponding probabilities.
-
-        Args:
-            items: A list of items.
-            probabilities: A list of probabilities corresponding to each item in 'items'.
-
-        Returns:
-            A randomly selected item from the list.
-        """
-        #tqdm.write(f'{probabilities}')
         # Validate input lengths
         if len(items) != len(probabilities):
             raise ValueError("Length of items and probabilities must be equal.")
@@ -205,7 +194,6 @@ class AntCol:
         random_value = np.random.random()
 
         # Find the item corresponding to the random value using the CDF
-        #tqdm.write(f'cdf[-1] = {cdf[-1]}')
         for i, prob in enumerate(cdf):
             if random_value <= prob:
                 return items[i]
@@ -255,6 +243,6 @@ if __name__ == '__main__':
                             beta=beta,
                             rho= gamma,
                             iterations=iterations,
-                            num_ants = num_ants,
+                            Numant = num_ants,
                             dataset= dataset)
     graph_coloring.main()
